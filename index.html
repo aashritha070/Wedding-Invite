@@ -163,8 +163,8 @@
     padding:4.8rem clamp(1.4rem,6vw,4rem) 1.2rem;
     background-color: var(--ink);
     background-image: 
-      linear-gradient(to bottom, rgba(247,234,210,0.55) 0%,rgba(247,234,210,0.45) 100%),
-      url("hero-selfie.png"); 
+      linear-gradient(to right, rgba(247,234,210,0.95) 0%, rgba(247,234,210,0.85) 60%, rgba(247,234,210,0.45) 100%),
+      url("assets/hero-selfie.png"); 
     background-position: center right;
     background-size: cover;
     background-repeat: no-repeat;
@@ -395,7 +395,7 @@
 
   @media (max-width:900px){ 
     .card-grid{grid-template-columns:1fr;} 
-    .hero-bg-section{ background-image: linear-gradient(to bottom, rgba(247,234,210,0.92) 0%, rgba(247,234,210,0.85) 100%), url("hero-selfie.png"); }
+    .hero-bg-section{ background-image: linear-gradient(to bottom, rgba(247,234,210,0.92) 0%, rgba(247,234,210,0.85) 100%), url("assets/hero-selfie.png"); }
   }
   @media (max-width:540px){
     .hero-bg-section{padding-top:4.2rem;}
@@ -413,8 +413,9 @@
     <h2>Aashritha &amp; Harish</h2>
     <div class="intro-sub">✿ The Wedding Edition ✿</div>
     <div class="intro-image-wrap">
-      <img src="temple-mandapam.png" alt="South Indian temple and wedding mandapam">
+      <img src="assets/temple-mandapam.png" alt="South Indian temple and wedding mandapam">
     </div>
+    <div class="intro-sub">#HariKiAashiqui 😜</div>
     <button class="btn btn-rose hero-play" onclick="dismissIntro()">
       <span>Enter &amp; Play</span> <span>▶</span>
     </button>
@@ -446,7 +447,7 @@
     <div class="hero-inner-content">
       
       <h1>Aashritha <br><span class="amp">&amp;</span> Harish</h1>
-      <p class="tagline">So we decided not to be single anymore. lol</p>
+      <p class="tagline">So we decided not to be single anymore...</p>
       <p class="bio">
         Meet <b>Harish Ramasamy</b>, an architect by profession, and a lovely boy by heart, who fell for (and with) <b>Aashritha Venkataraman</b>, a data analyst who ran every model she had and still couldn't find a variable big enough to explain his charm.
       </p>
@@ -486,7 +487,7 @@
   <div class="ep-tabbar">
     <div class="ep-tab active" onclick="openEpisode(1)">E1 · Our Kutty Story</div>
     <div class="ep-tab" onclick="openEpisode(2)">E2 · So What Next?</div>
-    <div class="ep-tab" onclick="openEpisode(3)">E3 · Get There</div>
+    <div class="ep-tab" onclick="openEpisode(3)">E3 . Join us ❤️</div>
   </div>
   <section class="ep-body">
     <div class="sec-head">
@@ -512,8 +513,8 @@
         <p>Different cities, different time zones, same two people refusing to let a map decide how this ends.</p>
       </div>
       <div class="beat final">
-        <h3>Time to Close the Distance</h3>
-        <p>Turns out there's a very simple fix for long distance. It's called a wedding. Cue Episode 2.</p>
+        <h3>And now...The Marriage</h3>
+        <p>Well..That escalated quickly 🤣</p>
       </div>
     </div>
     <div class="ep-nav-next" onclick="openEpisode(2)">
@@ -528,7 +529,7 @@
   <div class="ep-tabbar">
     <div class="ep-tab" onclick="openEpisode(1)">E1 · Our Kutty Story</div>
     <div class="ep-tab active" onclick="openEpisode(2)">E2 · So What Next?</div>
-    <div class="ep-tab" onclick="openEpisode(3)">E3 · Get There</div>
+    <div class="ep-tab" onclick="openEpisode(3)">E3 · Join us ❤️</div>
   </div>
   <section class="ep-body">
     <div class="sec-head">
@@ -583,7 +584,7 @@
     </div>
 
     <div class="ep-nav-next" onclick="openEpisode(3)">
-      <div class="next-label">Up Next<b>Episode 3 · Get There</b></div>
+      <div class="next-label">Up Next<b>Episode 3 · Find your way</b></div>
       <button class="btn btn-ghost">Next Episode →</button>
     </div>
   </section>
@@ -594,7 +595,7 @@
   <div class="ep-tabbar">
     <div class="ep-tab" onclick="openEpisode(1)">E1 · Our Kutty Story</div>
     <div class="ep-tab" onclick="openEpisode(2)">E2 · So What Next?</div>
-    <div class="ep-tab active" onclick="openEpisode(3)">E3 · Get There</div>
+    <div class="ep-tab active" onclick="openEpisode(3)">E3 · Join us ❤️</div>
   </div>
   <section class="ep-body">
     <div class="sec-head">
@@ -605,7 +606,7 @@
     <div class="map-card">
       <div class="map-embed-wrap">
         <iframe 
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.001602498263!2d80.1772439!3d12.9717616!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525e1e197c38ed%3A0x6b86fb83dfcfd065!2sSwarna%20Sudarshan%20Hall!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" 
+          src="https://www.google.com/maps?q=Swarna%20Sudarshan%20Wedding%20Hall%2C%20Gopal%20Nagar%20Main%20Road%2C%20Elumalai%20Salai%20St%2C%20Nanmangalam%2C%20Chennai%2C%20Tamil%20Nadu%20600129&output=embed" 
           allowfullscreen="" 
           loading="lazy" 
           referrerpolicy="no-referrer-when-downgrade">
@@ -625,7 +626,7 @@
 </div>
 
 <audio id="bgm" loop preload="auto">
-  <source src="song.mp3" type="audio/mpeg">
+  <source src="assets/song.mp3" type="audio/mpeg">
 </audio>
 
 <script>
