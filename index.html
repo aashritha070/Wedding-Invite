@@ -1,4 +1,4 @@
-hec<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -24,12 +24,12 @@ hec<!DOCTYPE html>
     --deep:#4a2118;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
-  html{scroll-behavior:smooth; overflow-x:hidden; width:100%; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
+  html{scroll-behavior:smooth; overflow-x:clip; width:100%; -webkit-text-size-adjust:100%; text-size-adjust:100%;}
   body{
     background:var(--ink);
     color:var(--cream);
     font-family:'Inter',sans-serif;
-    overflow-x:hidden;
+    overflow-x:clip;
     width:100%;
   }
   ::selection{background:var(--temple-red); color:var(--ink);}
@@ -423,97 +423,84 @@ hec<!DOCTYPE html>
     .map-info .btn{width:100%; justify-content:center;}
   }
   
-/* ---------- STORY TIMELINE + MEMORY REEL ---------- */
-
-.story-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-    gap: clamp(2rem, 5vw, 4rem);
-    align-items: start;
-    max-width: 1100px;
+/* ---------- STORY TIMELINE + SIDE MEMORY REEL ---------- */
+.story-layout{
+  --reel-w:190px;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) var(--reel-w);
+  gap:clamp(0.9rem, 4vw, 3rem);
+  align-items:stretch;          /* reel column = same height as the timeline */
+  max-width:900px;
 }
+.story-layout .timeline{ max-width:none; margin-bottom:0; }
 
-.story-layout .timeline {
-    max-width: none;
-    margin-bottom: 0;
+.reel-side{
+  display:flex; flex-direction:column; align-items:center; gap:0.5rem;
+  min-height:0;
 }
-
-.story-reel {
-    --reel-window-height: 620px;
-    height: var(--reel-window-height);
-    position: sticky;
-    top: 100px;
-    overflow: hidden;
-    border-radius: 16px;
-    border: 2px solid var(--temple-gold);
-    background: var(--deep);
-    box-shadow: 0 10px 30px rgba(74,33,24,0.18);
+.story-reel{
+  flex:1;                       /* fills the full timeline height */
+  width:100%;
+  min-height:0;
+  overflow:hidden;
+  position:relative;
+  border-radius:999px 999px 14px 14px;
+  border:2px solid var(--temple-gold);
+  background:var(--deep);
+  box-shadow:0 10px 26px rgba(74,33,24,0.22);
 }
-
-.story-reel img {
-    width: 100%;
-    height: auto;
-    display: block;
-    animation: reelScroll 35s ease-in-out infinite alternate;
+/* 4 copies of the strip stacked; moving up by one copy loops seamlessly */
+.reel-track{
+  position:absolute; top:0; left:0; width:100%;
+  display:flex; flex-direction:column;
+  animation:reelLoop 40s linear infinite;
 }
-
-.story-reel:hover img {
-    animation-play-state: paused;
+.reel-track img{ width:100%; height:auto; display:block; }
+.story-reel:hover .reel-track{ animation-play-state:paused; }
+@keyframes reelLoop{
+  from{ transform:translateY(0); }
+  to{ transform:translateY(-25%); }
 }
-
-@keyframes reelScroll {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(calc(-100% + var(--reel-window-height)));
-    }
-}
-
-/* Soft fade at top and bottom */
 .story-reel::before,
-.story-reel::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    height: 45px;
-    z-index: 2;
-    pointer-events: none;
+.story-reel::after{
+  content:""; position:absolute; left:0; right:0; height:36px;
+  z-index:2; pointer-events:none;
+}
+.story-reel::before{ top:0; background:linear-gradient(to bottom, rgba(74,33,24,.35), transparent); }
+.story-reel::after{ bottom:0; background:linear-gradient(to top, rgba(74,33,24,.35), transparent); }
+.reel-caption{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:0.6rem; letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--temple-red); font-weight:600; text-align:center;
 }
 
-.story-reel::before {
-    top: 0;
-    background: linear-gradient(to bottom, rgba(74,33,24,.35), transparent);
+/* Phones: keep it on the side, just slimmer */
+@media (max-width:540px){
+  .story-layout{ --reel-w:88px; gap:0.9rem; }
+  .story-layout .timeline{ padding-left:1.9rem; }
+  .story-layout .beat::before{ left:-1.9rem; }
+  .story-layout .beat h3{ font-size:1.15rem; }
+  .story-layout .beat p{ font-size:0.9rem; }
+  .reel-caption{ font-size:0.5rem; letter-spacing:0.1em; }
+}
+@media (prefers-reduced-motion: reduce){
+  .reel-track{ animation:none; }
 }
 
-.story-reel::after {
-    bottom: 0;
-    background: linear-gradient(to top, rgba(74,33,24,.35), transparent);
+
+/* FINAL REEL FIX - keep this at the very end of <style> */
+.story-layout{ align-items:stretch !important; }
+.reel-side{
+  position:relative !important;
+  top:auto !important;
+  align-self:stretch !important;
+  height:auto !important;
 }
-
-/* Mobile layout */
-@media (max-width: 700px) {
-    .story-layout {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-    }
-
-    .story-reel {
-        position: relative;
-        top: auto;
-        --reel-window-height: 420px;
-        width: min(100%, 260px);
-        margin: 0 auto;
-    }
+.story-reel{
+  flex:1 1 auto !important;
+  height:auto !important;
+  min-height:300px !important;
 }
-
-@media (prefers-reduced-motion: reduce) {
-    .story-reel img {
-        animation: none;
-    }
-}
-
 </style>
 </head>
 <body>
@@ -606,35 +593,41 @@ hec<!DOCTYPE html>
       <p>It all started with one unexpected hello, and somehow, against every time zone, it never stopped.</p>
     </div>
     <div class="story-layout">
-    <div class="timeline">
-      <div class="beat">
-        <h3>Masters in Ireland</h3>
-        <p>Two strangers, packed a suitcase, moved across the world for a master's degree, and had absolutely no idea life was about to plot-twist.</p>
+      <div class="timeline">
+        <div class="beat">
+          <h3>Masters in Ireland</h3>
+          <p>Two strangers, packed a suitcase, moved across the world for a master's degree, and had absolutely no idea life was about to plot-twist.</p>
+        </div>
+        <div class="beat">
+          <h3>The Meet Cute</h3>
+          <p>An ordinary hello that had no business becoming this big a deal. Conversations that just wouldn't end.</p>
+        </div>
+        <div class="beat">
+          <h3>Infinite Dates</h3>
+          <p>Coffees that turned into lunches and dinners. We ran out of new places to go before we ran out of things to say.</p>
+        </div>
+        <div class="beat">
+          <h3>Long Distance</h3>
+          <p>Different cities, different time zones, same two people refusing to let a map decide how this ends.</p>
+        </div>
+        <div class="beat final">
+          <h3>And now...The Wedding</h3>
+          <p>and You're invited to this part ❤️</p>
+        </div>
       </div>
-      <div class="beat">
-        <h3>The Meet Cute</h3>
-        <p>An ordinary hello that had no business becoming this big a deal. Conversations that just wouldn't end.</p>
-      </div>
-      <div class="beat">
-        <h3>Infinite Dates</h3>
-        <p>Coffees that turned into lunches and dinners. We ran out of new places to go before we ran out of things to say.</p>
-      </div>
-      <div class="beat">
-        <h3>Long Distance</h3>
-        <p>Different cities, different time zones, same two people refusing to let a map decide how this ends.</p>
-      </div>
-      <div class="beat final">
-        <h3>And now...The Wedding</h3>
-        <p>and You're invited to this part ❤️</p>
-      </div>
-       <aside class="story-reel">
-        <img
-            src="photo-output.jpg"
-            alt="A collection of Aashritha and Harish's memories together"
-        >
-    </aside>
 
-</div>
+      <!-- SLIM MOVING REEL ON THE RIGHT -->
+      <aside class="reel-side">
+        <div class="story-reel">
+          <div class="reel-track">
+            <img src="photo-output.jpg" alt="A collection of Aashritha and Harish's memories together">
+            <img src="photo-output.jpg" alt="" aria-hidden="true">
+            <img src="photo-output.jpg" alt="" aria-hidden="true">
+            <img src="photo-output.jpg" alt="" aria-hidden="true">
+          </div>
+        </div>
+        <span class="reel-caption">Our frames ♥</span>
+      </aside>
     </div>
     <div class="ep-nav-next" onclick="openEpisode(2)">
       <div class="next-label">Up Next<b>Episode 2 · So What Next? Marriage 💑</b></div>
