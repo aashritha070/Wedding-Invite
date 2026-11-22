@@ -422,6 +422,98 @@ hec<!DOCTYPE html>
     .map-info{flex-direction:column; align-items:flex-start;}
     .map-info .btn{width:100%; justify-content:center;}
   }
+  
+/* ---------- STORY TIMELINE + MEMORY REEL ---------- */
+
+.story-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: start;
+    max-width: 1100px;
+}
+
+.story-layout .timeline {
+    max-width: none;
+    margin-bottom: 0;
+}
+
+.story-reel {
+    --reel-window-height: 620px;
+    height: var(--reel-window-height);
+    position: sticky;
+    top: 100px;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 2px solid var(--temple-gold);
+    background: var(--deep);
+    box-shadow: 0 10px 30px rgba(74,33,24,0.18);
+}
+
+.story-reel img {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: reelScroll 35s ease-in-out infinite alternate;
+}
+
+.story-reel:hover img {
+    animation-play-state: paused;
+}
+
+@keyframes reelScroll {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(calc(-100% + var(--reel-window-height)));
+    }
+}
+
+/* Soft fade at top and bottom */
+.story-reel::before,
+.story-reel::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 45px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.story-reel::before {
+    top: 0;
+    background: linear-gradient(to bottom, rgba(74,33,24,.35), transparent);
+}
+
+.story-reel::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(74,33,24,.35), transparent);
+}
+
+/* Mobile layout */
+@media (max-width: 700px) {
+    .story-layout {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+    }
+
+    .story-reel {
+        position: relative;
+        top: auto;
+        --reel-window-height: 420px;
+        width: min(100%, 260px);
+        margin: 0 auto;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .story-reel img {
+        animation: none;
+    }
+}
+
 </style>
 </head>
 <body>
@@ -513,6 +605,7 @@ hec<!DOCTYPE html>
       <h2>Our <i>Kutty</i> Story</h2>
       <p>It all started with one unexpected hello, and somehow, against every time zone, it never stopped.</p>
     </div>
+    <div class="story-layout">
     <div class="timeline">
       <div class="beat">
         <h3>Masters in Ireland</h3>
@@ -534,6 +627,14 @@ hec<!DOCTYPE html>
         <h3>And now...The Wedding</h3>
         <p>and You're invited to this part ❤️</p>
       </div>
+       <aside class="story-reel">
+        <img
+            src="photo-output.jpg"
+            alt="A collection of Aashritha and Harish's memories together"
+        >
+    </aside>
+
+</div>
     </div>
     <div class="ep-nav-next" onclick="openEpisode(2)">
       <div class="next-label">Up Next<b>Episode 2 · So What Next? Marriage 💑</b></div>
