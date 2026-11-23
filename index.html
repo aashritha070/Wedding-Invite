@@ -433,7 +433,7 @@
   max-width:900px;
 }
 .story-layout .timeline{ max-width:none; margin-bottom:0; }
-.story-reel:hover .reel-track{ animation-play-state: running; }
+
 
 .reel-side{
   display:flex; flex-direction:column; align-items:center; gap:0.5rem;
@@ -457,7 +457,7 @@
   animation:reelLoop 40s linear infinite;
 }
 .reel-track img{ width:100%; height:auto; display:block; }
-}
+.story-reel:hover .reel-track{ animation-play-state: running; }
 @keyframes reelLoop{
   from{ transform:translateY(0); }
   to{ transform:translateY(-25%); }
